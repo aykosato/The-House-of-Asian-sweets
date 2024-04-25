@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Карточка товара</title>
+  <link rel="stylesheet" type="text/css" href="карточка.css">
+</head>
+<body>
+  <div>
+    <h1>Карточка товара</h1>
+    <div class="card">
+      <img id="main-image" src="img/2c.png">
+      <div class="more-images">
+        <img src="img/22c.jpg" onmouseover="changeImage('img/22c.jpg')" onmouseout="resetImage()">
+      </div>
+      <p>Название - Желе питьевое с конняку со вкусом граната 16kcal Blike</p>
+      <p>Цена - 69р</p>
+      <p>Страна - Китай</p>
+      <p>Объем - 160гр</p>
+      <p>Описание - Питьевое желе со вкусом граната, сделанное из натурального загустителя конняку. Это желе является сытным и очень вкусным перекусом, его можно взять с собой в сумке и полакомиться где вам удобно благодаря удобной герметичной упаковке. </p>
+      <div id="rating_bar">
+        <span id="rate_1">&#9734;</span>
+        <span id="rate_2">&#9734;</span>
+        <span id="rate_3">&#9734;</span>
+        <span id="rate_4">&#9734;</span>
+        <span id="rate_5">&#9734;</span>
+      </div>
+    </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function changeImage(imageUrl) {
+      document.getElementById('main-image').src = imageUrl;
+    }
+
+    function resetImage() {
+      document.getElementById('main-image').src = 'img/2c.png';
+    }
+
+
+    let spans = document.getElementById("rating_bar").getElementsByTagName('span');
+
+for (let i = 0; i < spans.length; i++) {
+  spans[i].onmouseover = hoverStar;
+}
+
+function hoverStar() {
+  for (let i = 0; i < this.id.charAt(5); i++) {
+    spans[i].innerText = '⭐️';
+  }
+
+  for (let i = this.id.charAt(5); i < 5; i++) {
+    spans[i].innerText = '✰';
+  }
+}
+  </script>
+</body>
+</html>

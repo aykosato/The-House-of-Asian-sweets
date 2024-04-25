@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Обратная связь</title>
+  <link rel="stylesheet" type="text/css" href="csс.css">
+  <script>
+    function validateForm() {
+      const name = document.forms["contact_form"]["name"].value;
+      if (/\d/.test(name)) {
+        alert("Имя не должно содержать цифры!");
+        return false;
+      }
+
+      const email = document.forms["contact_form"]["email"].value;
+      if (!email.includes("@")) {
+        alert("Пожалуйста, введите корректный адрес электронной почты!");
+        return false;
+      }
+
+      return true; 
+    }
+  </script>
+</head>
+<body>
+  <form action="#" autocomplete="off" class="contact_form" method="post" name="contact_form" onsubmit="return validateForm()">
+    <h2>Оставьте отзыв</h2>
+    <label for="name">Имя</label>
+    <input type="text" name="name" placeholder="Ваше имя" required> 
+    <label for="email">Адрес электронной почты:</label>
+    <input type="email" name="email" placeholder="e@xample.com" required>
+    <label for="message">Отзыв</label>
+    <textarea name="message" cols="40" rows="6" required></textarea>
+    <button class="submit" type="submit">Отправить</button>
+  </form>
+</body>
+</html>

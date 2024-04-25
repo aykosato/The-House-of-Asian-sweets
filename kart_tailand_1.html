@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Карточка товара</title>
+  <link rel="stylesheet" type="text/css" href="карточка.css">
+</head>
+<body>
+  <div>
+    <h1>Карточка товара</h1>
+    <div class="card">
+      <img id="main-image" src="img/1t.png">
+      <div class="more-images">
+        <img src="img/11t.png" onmouseover="changeImage('img/11t.png')" onmouseout="resetImage()">
+      </div>
+      <p>Название - Желейные конфеты с натуральным соком "Фруктовое ассорти" Yoyo</p>
+      <p>Цена - 176р</p>
+      <p>Страна - Таиланд</p>
+      <p>Объем - 80гр</p>
+      <p>Описание - Тайский десерт с яркими вкусами. Имеет хороший состав. Желейные конфеты с натуральным соком «Фруктовое ассорти» Yoyo доставят большое удовольствие и позволят быстро восполнить нехватку энергии.</p>
+      <div id="rating_bar">
+        <span id="rate_1">&#9734;</span>
+        <span id="rate_2">&#9734;</span>
+        <span id="rate_3">&#9734;</span>
+        <span id="rate_4">&#9734;</span>
+        <span id="rate_5">&#9734;</span>
+      </div>
+    </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function changeImage(imageUrl) {
+      document.getElementById('main-image').src = imageUrl;
+    }
+
+    function resetImage() {
+      document.getElementById('main-image').src = 'img/1t.png';
+    }
+
+
+    let spans = document.getElementById("rating_bar").getElementsByTagName('span');
+
+for (let i = 0; i < spans.length; i++) {
+  spans[i].onmouseover = hoverStar;
+}
+
+function hoverStar() {
+  for (let i = 0; i < this.id.charAt(5); i++) {
+    spans[i].innerText = '⭐️';
+  }
+
+  for (let i = this.id.charAt(5); i < 5; i++) {
+    spans[i].innerText = '✰';
+  }
+}
+  </script>
+</body>
+</html>

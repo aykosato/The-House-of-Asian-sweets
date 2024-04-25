@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Карточка товара</title>
+  <link rel="stylesheet" type="text/css" href="карточка.css">
+</head>
+<body>
+  <div>
+    <h1>Карточка товара</h1>
+    <div class="card">
+      <img id="main-image" src="img/4j.png">
+      <div class="more-images">
+        <img src="img/44j.jpg" onmouseover="changeImage('img/44j.jpg')" onmouseout="resetImage()">
+      </div>
+      <p>Название - Освежающие леденцы без сахара со вкусом мяты и винограда Lishuang Sugar Free</p>
+      <p>Цена - 40р</p>
+      <p>Страна - Япония</p>
+      <p>Объем - 15 гр</p>
+      <p>Описание - Приятные на вкус освежающие конфеты-леденцы Lishuang Sugar Free обладают ярким бодрящим ароматом, освежают и очищают полость рта. Изготовлены в виде драже и напоминают по вкусу известный «тик-так».  </p>
+      <div id="rating_bar">
+        <span id="rate_1">&#9734;</span>
+        <span id="rate_2">&#9734;</span>
+        <span id="rate_3">&#9734;</span>
+        <span id="rate_4">&#9734;</span>
+        <span id="rate_5">&#9734;</span>
+      </div>
+    </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function changeImage(imageUrl) {
+      document.getElementById('main-image').src = imageUrl;
+    }
+
+    function resetImage() {
+      document.getElementById('main-image').src = 'img/4j.png';
+    }
+
+
+    let spans = document.getElementById("rating_bar").getElementsByTagName('span');
+
+for (let i = 0; i < spans.length; i++) {
+  spans[i].onmouseover = hoverStar;
+}
+
+function hoverStar() {
+  for (let i = 0; i < this.id.charAt(5); i++) {
+    spans[i].innerText = '⭐️';
+  }
+
+  for (let i = this.id.charAt(5); i < 5; i++) {
+    spans[i].innerText = '✰';
+  }
+}
+  </script>
+</body>
+</html>

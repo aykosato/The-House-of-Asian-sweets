@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина товаров</title>
+    <link rel="stylesheet" href="korzina.css"> 
+</head>
+<body>
+    <header>
+        <h1>Корзина товаров</h1>
+        <div class="btn">
+        <a class="button" href="index.html">Главная</a> 
+        </div>
+    </header>
+    <main>
+        <div class="cart-items">
+        </div>
+        <div class="total-price">
+            Общая сумма: <span id="total-price">0.00</span> 
+        </div>
+        <p>
+        <div class="btn">
+        <a class="button" href="#">Оформить заказ</a> 
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Получаем общую сумму из Local Storage, если она там есть
+    const totalPriceDisplay = document.getElementById('total-price');
+    let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+    totalPriceDisplay.textContent = totalPrice.toFixed(2);
+
+    // Получаем список добавленных товаров из Local Storage, если он там есть
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    // Восстанавливаем добавленные товары на страницу
+    storedCartItems.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.textContent = item.name + ' - ' + item.price.toFixed(2);
+        cartItemsContainer.appendChild(itemElement);
+    });
+
+    const addToCartButtons = document.querySelectorAll('.card_add');
+    const cartCount = document.querySelector('.cart-count');
+
+    let itemCount = parseInt(localStorage.getItem('itemCount')) || 0;
+    cartCount.textContent = itemCount;
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            itemCount++;
+            cartCount.textContent = itemCount;
+
+            const priceElement = this.closest('.card').querySelector('.card_price-common');
+            const price = parseFloat(priceElement.textContent);
+            totalPrice += price;
+            totalPriceDisplay.textContent = totalPrice.toFixed(2);
+
+            // Сохраняем общую сумму и количество товаров в Local Storage
+            localStorage.setItem('totalPrice', totalPrice);
+            localStorage.setItem('itemCount', itemCount);
+
+            // Сохраняем добавленный товар в Local Storage
+            const itemName = this.closest('.card').querySelector('.card_title').textContent;
+            const newItem = { name: itemName, price: price };
+            storedCartItems.push(newItem);
+            localStorage.setItem('cartItems', JSON.stringify(storedCartItems));
+
+            // Добавляем добавленный товар на страницу
+            const newItemElement = document.createElement('div');
+            newItemElement.textContent = itemName + ' - ' + price.toFixed(2);
+            cartItemsContainer.appendChild(newItemElement);
+        });
+    });
+});
+    </script> 
+</body>
+</html>
